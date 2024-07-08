@@ -231,6 +231,4 @@ const arr = [
     }
 ]
 
-module.exports = {
-    arr
-}
+module.exports = arr
