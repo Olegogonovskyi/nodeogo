@@ -1,0 +1,1 @@
+Hello from threeFolder file that is in C:\Users\User\IdeaProjects\nodeogo\baseFolder\threeFolder\fiveFilethreeFolder.txt
