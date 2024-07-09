@@ -7,16 +7,16 @@ const folderArrays = ['oneFolder', 'twoFolder', 'threeFolder', 'fourFolder', 'fi
 const fileArrays = ['oneFile', 'twoFile', 'threeFile', 'fourFile', 'fiveFile']
 const fileType = '.txt'
 
-const whatIsThat = async (obPath) => {
-    const stats = await fs.stat(obPath)
-    if (stats.isFile()) {
-        console.log(`${path.basename(obPath)} ---- є файлом шлях до нього -------- ${obPath}`)
-    } else if (stats.isDirectory()) {
-        console.log(`${path.basename(obPath)} ---- є папкою шлях до неї -------- ${obPath}`)
-    } else {
-        console.log(`${path.basename(obPath)} ---- є фіг зна чим шлях до цього -------- ${obPath}`)
-    }
-}
+// const whatIsThat = async (obPath) => {
+//     const stats = await fs.stat(obPath)
+//     if (stats.isFile()) {
+//         console.log(`${path.basename(obPath)} ---- є файлом шлях до нього -------- ${obPath}`)
+//     } else if (stats.isDirectory()) {
+//         console.log(`${path.basename(obPath)} ---- є папкою шлях до неї -------- ${obPath}`)
+//     } else {
+//         console.log(`${path.basename(obPath)} ---- є фіг зна чим шлях до цього -------- ${obPath}`)
+//     }
+// }
 
 const domashka = async () => {
 
@@ -37,5 +37,8 @@ await fs.mkdir(path.join(__dirname, ...folderArrays), {recursive: true})
     //         })
     //     }
     // }
+    // await fs.rm(path.join(__dirname, 'sssss'), {recursive: true})
+    await fs.unlink(path.join(__dirname, 'all.ged'))
+
 }
 void domashka()
