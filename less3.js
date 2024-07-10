@@ -1,8 +1,6 @@
 const express = require('express')
 const path = require('node:path')
 const fs = require('node:fs/promises');
-const fssyn = require('node:fs');
-
 
 const app = express()
 app.use(express.json())
@@ -18,17 +16,33 @@ const superHeroGetter = async () => {
 }
 
 app.get(superheroesPath, async (req, res) => {
-    const data = await superHeroGetter()
-    await res.json(data);
+    try {
+        const data = await superHeroGetter()
+        await res.json(data);
+    } catch (e) {
+        res.status(500).json({message: 'Друже, сервер на відпочинку'})
+    }
+
 })
 app.post(superheroesPath, async (req, res) => {
-    const data = await superHeroGetter()
-    const addData = req.body
-    data.push(addData)
-    console.log(data)
-    await fs.writeFile(pathToArray, JSON.stringify(data))
-    res.status(201).json({message: 'Bimba'})
+    try {
+        const data = await superHeroGetter()
+        const addData = req.body
+        const duplicate = data.find(
+            (item) => item.id === addData.id || item.name === addData.name || item.image.url === addData.image.url
+        );
+        if (duplicate) {
+            res.status(409).json({ message: 'Такі дані вже існують' });
+        } else {
+            data.push(addData);
+            await fs.writeFile(pathToArray, JSON.stringify(data, null, 2));
+            res.status(201).json({ message: 'Bimba' });
+        }
+    } catch (e) {
+res.status(400).json({message: 'Bad Request' })
+    }
 })
+
 app.listen(PORT, () => {
     console.log(PORT)
 })
