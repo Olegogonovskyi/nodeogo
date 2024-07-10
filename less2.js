@@ -38,7 +38,8 @@ await fs.mkdir(path.join(__dirname, ...folderArrays), {recursive: true})
     //     }
     // }
     // await fs.rm(path.join(__dirname, 'sssss'), {recursive: true})
-    await fs.unlink(path.join(__dirname, 'all.ged'))
+    // await fs.unlink(path.join(__dirname, 'all.ged'))
+    await fs.writeFile(path.join(__dirname))
 
 }
 void domashka()
